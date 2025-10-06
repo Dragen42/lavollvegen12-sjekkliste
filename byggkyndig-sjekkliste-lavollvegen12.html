@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Byggkyndig sjekkliste – Lavollvegen 12</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+    }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: linear-gradient(180deg, #ffffffcc, #ffffffaa);
+      backdrop-filter: saturate(1.2) blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 16px; }
+    h1 { font-size: 1.3rem; margin: 6px 0 0; }
+    .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 8px; }
+    .pill {
+      display: inline-block; font-size: 0.8rem; color: #0f5132; background: #d1e7dd;
+      border: 1px solid #badbcc; border-radius: 999px; padding: 2px 10px; margin-left: 6px;
+    }
+    .grid {
+      display: grid; gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    section.card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    section.card h2 {
+      margin: 0 0 6px; font-size: 1.05rem;
+    }
+    details { border-top: 1px dashed var(--border); padding-top: 8px; margin-top: 8px; }
+    details summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+    .item { display: grid; grid-template-columns: 24px 1fr; align-items: start; gap: 6px; padding: 6px 0; }
+    .item + .item { border-top: 1px dashed var(--border); }
+    textarea {
+      width: 100%; min-height: 70px; resize: vertical; border-radius: 8px; border: 1px solid var(--border);
+      padding: 8px; font: inherit; background: #fff;
+    }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    footer { color: var(--muted); font-size: 0.85rem; text-align: center; padding: 24px 12px; }
+    .bar {
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    button, .btn {
+      appearance: none; border: 1px solid var(--border); background: #fff; color: var(--text);
+      padding: 8px 12px; border-radius: 8px; cursor: pointer; font: inherit;
+    }
+    .btn-primary { background: var(--accent); border-color: #1d4ed8; color: #fff; }
+    .small { font-size: 0.85rem; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Byggkyndig sjekkliste – Lavollvegen 12, Trofors <span class="pill">Mobilvennlig</span></h1>
+      <div class="sub">Basert på salgsoppgave og tilstandsrapport (Helgeland Byggekontroll, 2025). Alt lagres lokalt i nettleseren (ingen opplasting).</div>
+      <div class="bar">
+        <button class="btn-primary" onclick="save()">Lagre nå</button>
+        <button onclick="print()">Skriv ut / lag PDF</button>
+        <button onclick="resetAll()">Tøm alle felt</button>
+        <span id="saved" class="muted small"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="app" role="main">
+    <div class="grid">
+      <!-- 1 -->
+      <section class="card" id="grp1">
+        <h2>1) Grunnmur & drenering (TG3/TG2)</h2>
+        <div class="muted small">Drenering fra 1968, fukt i kjeller, skråriss i grunnmur.</div>
+        <div class="item"><input type="checkbox" id="1a"><label for="1a">Fuktlukt, misfarging, saltutslag på kjellermur?</label></div>
+        <div class="item"><input type="checkbox" id="1b"><label for="1b">Sprekker/riss i mur (bredde/dybde, sted)?</label></div>
+        <div class="item"><input type="checkbox" id="1c"><label for="1c">Terrengfall bort fra huset (ikke mot)?</label></div>
+        <details><summary>Notater</summary><textarea id="1n" placeholder="Skriv observasjoner, rom/vegg, bilder du tok osv."></textarea></details>
+      </section>
+
+      <!-- 2 -->
+      <section class="card" id="grp2">
+        <h2>2) Kledning, vinduer & dører (TG2/TG3)</h2>
+        <div class="muted small">Mangelfull lufting; kjellervinduer med råte/sprekker; mangler beslag/vannbrett.</div>
+        <div class="item"><input type="checkbox" id="2a"><label for="2a">Kledning: sprekker, råte, flassende maling (sjekk nordvegg).</label></div>
+        <div class="item"><input type="checkbox" id="2b"><label for="2b">Vinduer: mykt treverk nederst, punkterte ruter?</label></div>
+        <div class="item"><input type="checkbox" id="2c"><label for="2c">Dører: tetter de godt? Mangler beslag/vannbrett?</label></div>
+        <details><summary>Notater</summary><textarea id="2n" placeholder="Hvilke vegger/vinduer/dører? Foto-referanser."></textarea></details>
+      </section>
+
+      <!-- 3 -->
+      <section class="card" id="grp3">
+        <h2>3) Terrasse / balkong (TG3)</h2>
+        <div class="muted small">Råte/sprekk; rekkverk 77 cm (for lavt); utvidelse ikke byggemeldt.</div>
+        <div class="item"><input type="checkbox" id="3a"><label for="3a">Treverk mykt/oppfliset ved skjøter og rekkverk?</label></div>
+        <div class="item"><input type="checkbox" id="3b"><label for="3b">Synlige lekkasjer/mangler i tetting/membran?</label></div>
+        <div class="item"><input type="checkbox" id="3c"><label for="3c">Avklar med megler: ettergodkjenning / dialog med kommunen?</label></div>
+        <details><summary>Notater</summary><textarea id="3n" placeholder="Hva så du? Hva ble sagt?"></textarea></details>
+      </section>
+
+      <!-- 4 -->
+      <section class="card" id="grp4">
+        <h2>4) Gulv & konstruksjoner</h2>
+        <div class="muted small">Skjevheter i begge etasjer; sprekk i betonggulv.</div>
+        <div class="item"><input type="checkbox" id="4a"><label for="4a">Kjenner du svaie/helling? (test med liten ball/mynt)</label></div>
+        <div class="item"><input type="checkbox" id="4b"><label for="4b">Sprekk i betonggulv? Hvor og hvor stor?</label></div>
+        <details><summary>Notater</summary><textarea id="4n" placeholder="Rom/område, estimert helning, bilder."></textarea></details>
+      </section>
+
+      <!-- 5 -->
+      <section class="card" id="grp5">
+        <h2>5) Bad & vaskerom (TG3)</h2>
+        <div class="muted small">Bad 2015 utført ufaglært; gammelt sluk uten klemring; begge vaskerom må oppgraderes.</div>
+        <div class="item"><input type="checkbox" id="5a"><label for="5a">Misfarging ved gulv/vegg/fuger? Løse/flisete plater?</label></div>
+        <div class="item"><input type="checkbox" id="5b"><label for="5b">Finnes dokumentasjon på arbeid / uavhengig kontroll?</label></div>
+        <div class="item"><input type="checkbox" id="5c"><label for="5c">Fall mot sluk OK? Hvor går vann ved lekkasje?</label></div>
+        <details><summary>Notater</summary><textarea id="5n" placeholder="Hvem utførte arbeid? Foto sluk/fall/overganger."></textarea></details>
+      </section>
+
+      <!-- 6 -->
+      <section class="card" id="grp6">
+        <h2>6) Tekniske installasjoner</h2>
+        <div class="muted small">Gamle vannrør; ufaglært avløp; VVB >20 år (uten tilfredsstillende avrenning); varmepumpe ikke testet.</div>
+        <div class="item"><input type="checkbox" id="6a"><label for="6a">Varmtvannstank: rust/lekkasjespor? Avrenning?</label></div>
+        <div class="item"><input type="checkbox" id="6b"><label for="6b">Rør: irr, drypp, midlertidige koblinger?</label></div>
+        <div class="item"><input type="checkbox" id="6c"><label for="6c">Varmepumpe: får du testet drift? Servicehistorikk?</label></div>
+        <details><summary>Notater</summary><textarea id="6n" placeholder="Plassering, årsmodell, servicepapirer."></textarea></details>
+      </section>
+
+      <!-- 7 -->
+      <section class="card" id="grp7">
+        <h2>7) Pipe & ildsted</h2>
+        <div class="muted small">Riss mellom røykrør og sotluke.</div>
+        <div class="item"><input type="checkbox" id="7a"><label for="7a">Sprekker i murpuss ved sotluke/røykrør?</label></div>
+        <div class="item"><input type="checkbox" id="7b"><label for="7b">Dokumentasjon: siste feiing/tilsyn?</label></div>
+        <details><summary>Notater</summary><textarea id="7n" placeholder="Observasjoner + info fra megler."></textarea></details>
+      </section>
+
+      <!-- 8 -->
+      <section class="card" id="grp8">
+        <h2>8) Lovlighet & dokumentasjon</h2>
+        <div class="muted small">Ulovlig/ikke byggemeldt utvidelse terrasse/bod; garasje avviker; mangler ferdigattest på tilbygg/garasje.</div>
+        <div class="item"><input type="checkbox" id="8a"><label for="8a">Finnes dokumentasjon/korrespondanse med kommunen?</label></div>
+        <div class="item"><input type="checkbox" id="8b"><label for="8b">Er ettergodkjenning søkt/planlagt? Eventuelle pålegg?</label></div>
+        <details><summary>Notater</summary><textarea id="8n" placeholder="Hvilke vedtak/tegninger/mapper ble vist?"></textarea></details>
+      </section>
+
+      <!-- 9 -->
+      <section class="card" id="grp9">
+        <h2>9) Tomt & ytre forhold</h2>
+        <div class="muted small">Skrånende terreng; sjekk garasje/tilbygg nederst på panel; se etter vannavrenning.</div>
+        <div class="item"><input type="checkbox" id="9a"><label for="9a">Vann ledes bort fra huset? Tette renner/nedløp?</label></div>
+        <div class="item"><input type="checkbox" id="9b"><label for="9b">Råte nederst på panel rundt garasje/tilbygg?</label></div>
+        <details><summary>Notater</summary><textarea id="9n" placeholder="Dreneringspunkter, renner, nedløp, terreng."></textarea></details>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:12px">
+      <h2>Spørsmål til megler/selger</h2>
+      <ul>
+        <li>Har kommunen vært kontaktet om <strong>ettergodkjenning</strong> (terrasse/bod/garasje)?</li>
+        <li>Finnes <strong>dokumentasjon</strong> på bad (2015), el (Sinus 2021), rør, varmepumpe-service?</li>
+        <li>Har det vært <strong>forsikringssaker</strong> (vann/fukt)?</li>
+        <li>Når ble <strong>drenering</strong> sist vurdert av fagperson?</li>
+        <li>Radon: kan tidligere måling <strong>dokumenteres</strong>, evt. må ny måling gjøres?</li>
+      </ul>
+      <details><summary>Egne beslutningsnotater</summary><textarea id="final" placeholder="Oppsummering: Go/No-Go, forbehold i bud, prisavslag, videre undersøkelser."></textarea></details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2025 – Sjekklisten lagrer automatisk lokalt i nettleseren din. Du kan eksportere ved å skrive ut til PDF.</p>
+      <p class="small">Objekt: Lavollvegen 12, 8684 Trofors. Kildegrunnlag: Salgsoppgave + tilstandsrapport (Helgeland Byggekontroll AS, 2025).</p>
+    </div>
+  </footer>
+
+  <script>
+    const fields = Array.from(document.querySelectorAll("input[type=checkbox], textarea"));
+    const SAVED_AT = document.getElementById("saved");
+    const KEY = "lavollvegen12_sjekkliste_v1";
+
+    function save() {
+      const data = {};
+      fields.forEach(el => {
+        data[el.id] = el.type === "checkbox" ? el.checked : el.value;
+      });
+      localStorage.setItem(KEY, JSON.stringify(data));
+      const t = new Date();
+      SAVED_AT.textContent = "Lagret " + t.toLocaleTimeString();
+    }
+
+    function load() {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        fields.forEach(el => {
+          if (data.hasOwnProperty(el.id)) {
+            if (el.type === "checkbox") el.checked = !!data[el.id];
+            else el.value = data[el.id];
+          }
+        });
+        SAVED_AT.textContent = "Lastet lagrede felter";
+      } catch (e) {}
+    }
+
+    function resetAll() {
+      if (!confirm("Tøm alle felt og slett lokale data?")) return;
+      fields.forEach(el => {
+        if (el.type === "checkbox") el.checked = false;
+        else el.value = "";
+      });
+      localStorage.removeItem(KEY);
+      SAVED_AT.textContent = "Tømt";
+    }
+
+    // Autosave on change
+    fields.forEach(el => el.addEventListener("change", save));
+    window.addEventListener("load", load);
+  </script>
+</body>
+</html>
